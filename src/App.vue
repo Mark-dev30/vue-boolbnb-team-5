@@ -2,7 +2,6 @@
 
 import AppHeader from './components/AppHeader.vue'
 // import { store } from './store'
-
 import AppFooter from "./components/AppFooter.vue";
 
 export default {
@@ -18,7 +17,7 @@ export default {
   <div>
     <AppHeader></AppHeader>
     <AppFooter></AppFooter>
-  </div> 
+  </div>
 </template>
 
 <style lang="scss">
