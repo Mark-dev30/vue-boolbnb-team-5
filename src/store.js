@@ -1,4 +1,7 @@
 import { reactive } from "vue";
 export const store = reactive({
-    apikey: 'sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju'
+    baseUrl: 'http://127.0.0.1:8000',
+    apikey: 'sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju',
+    apartmentList: []
+
 })
