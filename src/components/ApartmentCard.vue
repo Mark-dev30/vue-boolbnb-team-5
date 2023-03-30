@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store';
 export default {
     name: 'ApartmentCard',
     props: {
@@ -7,7 +8,7 @@ export default {
     },
     data() {
         return {
-
+            store
         }
     }
 }
@@ -15,6 +16,7 @@ export default {
 <template lang="">
     <!-- <img :src="project.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'"class="img-fluid" alt=""> -->
     <div class="card-body">
+        <img :src="apartment.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'" alt="" class="img-fluid">
         <h5 class="card-title">{{ apartment.title }}</h5>
         <p class="card-text">N. Rooms{{ apartment.n_room }}</p>
         <p class="card-text">N. Bed{{ apartment.n_bed }}</p>
