@@ -54,7 +54,7 @@ export default {
         getApartments() {
             axios.get(`${store.baseUrl}/api/apartments`).then((response) => {
                 if (response.data.success) {
-                    this.apartments = response.data.apartments.data
+                    this.apartments = response.data.apartments
                     console.log(this.apartments)
                 }
             });
