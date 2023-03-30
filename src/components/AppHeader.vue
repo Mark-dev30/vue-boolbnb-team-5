@@ -24,6 +24,7 @@ export default {
             })
         },
         ConfrontProperty() {
+            store.apartmentList = []
             let AptPosition
             let arrayApt = []
             let AptString
@@ -34,7 +35,7 @@ export default {
             })
             AptString = arrayApt.toString()
             radiusUrl = `https://api.tomtom.com/search/2/geometryFilter.json?geometryList=%5B%7B%22type%22%3A%22CIRCLE%22%2C%20%22position%22%3A%22${this.researchPosition.lat}%2C%20${this.researchPosition.lon}%22%2C%20%22radius%22%3A20000%7D%2C%20%7B%22type%22%3A%22POLYGON%22%2C%20%22vertices%22%3A%5B%2237.7524152343544%2C%20-122.43576049804686%22%2C%20%2237.70660472542312%2C%20-122.43301391601562%22%2C%20%2237.712059855877314%2C%20-122.36434936523438%22%2C%20%2237.75350561243041%2C%20-122.37396240234374%22%5D%7D%5D&poiList=%5B${AptString}%5D&key=${store.apikey}`
-
+            console.log(radiusUrl)
             axios.get(radiusUrl).then((response) => {
                 let radiusUrl_results = response.data.results
                 let j
@@ -47,15 +48,15 @@ export default {
                     });
                     store.apartmentList.push(newArray)
                 }
-                console.log(store.apartmentList)
+                /* console.log(store.apartmentList) */
             })
         },
 
         getApartments() {
             axios.get(`${store.baseUrl}/api/apartments`).then((response) => {
                 if (response.data.success) {
-                    this.apartments = response.data.apartments
-                    console.log(this.apartments)
+                    this.apartments = response.data.apartments.data
+                    /* console.log(this.apartments) */
                 }
             });
         },

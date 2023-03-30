@@ -73,7 +73,7 @@ footer {
 
     .footer {
         font-size: 14px;
-        position: absolute;
+        margin-top: 5rem;
         bottom: 0;
         left: 0;
 
