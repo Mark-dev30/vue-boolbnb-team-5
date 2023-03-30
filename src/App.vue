@@ -3,13 +3,11 @@
 import AppHeader from './components/AppHeader.vue'
 // import { store } from './store'
 import AppFooter from "./components/AppFooter.vue";
-import HomePage from "./pages/HomePage.vue";
 
 export default {
   components: {
     AppFooter,
     AppHeader,
-    HomePage
   },
 };
 </script>
@@ -18,7 +16,7 @@ export default {
 <template>
   <div>
     <AppHeader></AppHeader>
-    <HomePage></HomePage>
+    <router-view></router-view>
     <AppFooter></AppFooter>
   </div>
 </template>
