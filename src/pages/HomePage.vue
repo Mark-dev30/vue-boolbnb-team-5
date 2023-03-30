@@ -4,28 +4,9 @@ import { store } from '../store';
 export default {
     name: 'HomePage',
 
-    data() {
-        return {
-            store,
-            apartments: [],
-        }
-    },
-    // methods: {
-    //     getApartments() {
-    //         axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
-    //             if (response.data.success) {
-    //                 this.apartments = response.data.apartments
-    //                 console.log(this.apartments)
-
-    //             }
-
-    //         });
-    //     }
-    // },
-    // mounted() {
-    //     this.getApartments()
-    // }
 }
+
+
 </script>
 <template lang="">
     <div>
