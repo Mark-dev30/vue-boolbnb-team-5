@@ -1,5 +1,6 @@
 <script>
 import {store} from "../store";
+
 export default {
     name: 'ApartmentCard',
     props: {
@@ -17,6 +18,7 @@ export default {
     <div class="h-same">
         <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug }}">
             <img :src="apartment.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'" alt="" class="img-fluid h-17 rounded-4">
+
         </router-link>
     </div>
     <div class="">

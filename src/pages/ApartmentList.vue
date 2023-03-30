@@ -19,9 +19,13 @@ export default {
                 if (response.data.success) {
                     this.apartments = response.data.apartments
 
+
                 }
 
+
+
             });
+
         },
         log(message) {
             console.log(message)
