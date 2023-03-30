@@ -10,32 +10,32 @@ export default {
             apartments: [],
         }
     },
-    methods: {
-        getApartments() {
-            axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
-                if (response.data.success) {
-                    this.apartments = response.data.apartments
-                    console.log(this.apartments)
+    // methods: {
+    //     getApartments() {
+    //         axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
+    //             if (response.data.success) {
+    //                 this.apartments = response.data.apartments
+    //                 console.log(this.apartments)
 
-                }
+    //             }
 
-            });
-        }
-    },
-    mounted() {
-        this.getApartments()
-    }
+    //         });
+    //     }
+    // },
+    // mounted() {
+    //     this.getApartments()
+    // }
 }
 </script>
 <template lang="">
     <div>
         <div>
-            <div v-for='(element, index) in apartments' :key="index" class="card" style="width: 18rem;">
+            <!-- <div v-for='(element, index) in apartments' :key="index" class="card" style="width: 18rem;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{element.title}}</h5>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
