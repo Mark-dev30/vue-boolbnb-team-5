@@ -10,25 +10,47 @@ export default {
     data() {
         return {
             store,
-            apartments: []
+            services: [],
+            n_beds: '',
+            n_bathrooms: '',
+            n_rooms: '',
         }
     },
+    computed: {
+        filterApartment: function () {
+            return this.filterProductsByBed(this.filterProductsByRoom(this.filterProductsByBathroom(store.apartmentList)))
+        }
+
+    },
     methods: {
+        getServices() {
+            axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
+                if (response.data.success) {
+                    this.services = response.data.services
+                }
+
+            });
+        },
+        filterProductsByBed: function (products) {
+            return products.filter(product => product[0].n_bed >= this.n_beds)
+        },
+
+        filterProductsByRoom: function (products) {
+            return products.filter(product => product[0].n_room >= this.n_rooms)
+        },
+
+        filterProductsByBathroom: function (products) {
+            return products.filter(product => product[0].n_bathroom >= this.n_bathrooms)
+        },
 
         log(message) {
             console.log(message)
         }
     },
+
     mounted() {
-        console.log(store.apartmentList)
+        this.getServices()
 
-        /* let i
-        for (i = 0; i < store.apartmentList.length; i++) {
-            this.apartments.push(store.apartmentList[i])
-            console.log(this.apartments)
-        } */
-
-        /* console.log(store.apartmentList) */
     }
 }
 </script>
@@ -36,26 +58,35 @@ export default {
     <div class="container">
         <div class="row ">
             <div class="col-9 d-flex flex-wrap justify-content-center">
-                <div class="card m-2 border-0" style="width: 18rem;" v-for="(apartment, index) in store.apartmentList" :key="apartment.id">
+                <div class="card m-2 border-0" style="width: 18rem;" v-for="(apartment, index) in filterApartment" :key="apartment.id">
                     <ApartmentCard :apartment="apartment[0]" />
                 </div>
             </div>
-            <div class="col-3 d-flex flex-wrap justify-content-center">
+            <div class="col-3 d-flex flex-wrap justify-content-center ">
+
                 <div class="my-3">
                     <label for="" class="form-label">Numero stanze</label>
-                    <input type="number" id="rooms" class="form-control" name="n_room">
+                    <input type="number" id="rooms" class="form-control" name="n_room" v-model='n_rooms'>
                 </div>
                 <div class="my-3">
                     <label for="" class="form-label">Numero letti</label>
-                    <input type="number" id="beds" class="form-control" name="n_bed">
+                    <input type="number" id="beds" class="form-control" name="n_bed" v-model='n_beds'>
                 </div>
                 <div class="my-3">
                     <label for="" class="form-label">Numero bagni</label>
-                    <input type="number" id="bathrooms" class="form-control" name="n_bathroom">
+                    <input type="number" id="bathrooms" class="form-control" name="n_bathroom" v-model='n_bathrooms'>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Seleziona i servizi</label>
-                    <input type="number" id="bathrooms" class="form-control" name="n_bathroom">
+                    <div v-for="service in services">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" name="">
+                            <label class="form-check-label">
+                                <i :class="service.class_icon"></i>
+                                {{service.name}}
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,6 +94,8 @@ export default {
 </template>
 <style scoped>
 .col-3 {
-    background-color: rgb(161, 161, 161);
+
+    background-color: rgb(218, 218, 218);
+    border-radius: 1rem
 }
 </style>

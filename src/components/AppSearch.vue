@@ -15,8 +15,7 @@ export default {
 
             }
             else {
-                let error = 'inserisci qalcosa'
-                console.log(error)
+                let error = 'inserisci qualcosa'
                 return error
             }
         }
