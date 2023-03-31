@@ -16,22 +16,36 @@ export default {
             n_rooms: '',
         }
     },
-    computed: {
+    /* computed: {
         filterApartment: function () {
             return this.filterProductsByBed(this.filterProductsByRoom(this.filterProductsByBathroom(store.apartmentList)))
         }
 
-    },
+    }, */
     methods: {
         getServices() {
             axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
+
                 if (response.data.success) {
                     this.services = response.data.services
                 }
 
             });
         },
-        filterProductsByBed: function (products) {
+        /* PostServices() {
+            axios.post(`${this.store.baseUrl}/api/apartments`, {
+                name: 'lorenzo',
+                surname: 'ciao'
+            }).then((response) => {
+
+                if (response.data.success) {
+                    console.log(response)
+                }
+
+            });
+            
+        }, */
+        /* filterProductsByBed: function (products) {
             return products.filter(product => product[0].n_bed >= this.n_beds)
         },
 
@@ -45,11 +59,12 @@ export default {
 
         log(message) {
             console.log(message)
-        }
+        } */
     },
 
     mounted() {
         this.getServices()
+        this.PostServices()
 
     }
 }
@@ -76,7 +91,7 @@ export default {
                     <label for="" class="form-label">Numero bagni</label>
                     <input type="number" id="bathrooms" class="form-control" name="n_bathroom" v-model='n_bathrooms'>
                 </div>
-                <div class="mb-3">
+                <div class="my-3">
                     <label for="" class="form-label">Seleziona i servizi</label>
                     <div v-for="service in services">
                         <div class="form-check">
@@ -94,7 +109,7 @@ export default {
 </template>
 <style scoped>
 .col-3 {
-
+    height: 50%;
     background-color: rgb(218, 218, 218);
     border-radius: 1rem
 }
