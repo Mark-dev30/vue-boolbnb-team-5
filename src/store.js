@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+/* import { reactive } from "vue";
 export const store = reactive({
     baseUrl: 'http://127.0.0.1:8000',
     apikey: 'sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju',
@@ -6,4 +6,37 @@ export const store = reactive({
     searchUrlSecond: '.json?storeResult=false&countrySet=IT&language=it-IT&view=Unified&key=',
     apartmentList: []
 
+}) */
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+// Create a new store instance.
+export default new Vuex.Store({
+  state: {
+      string: ''
+  },
+  mutations: {
+    setString(state, payload) {
+        state.string = payload;
+    }
+  },
+  actions: {
+    setString({commit}, payload){
+        commit('setString', payload);
+    }
+  },
+  modules: {},
+  getters: {
+    getString (state) {
+       return state.string
+    }
+  }
 })
+
+/* const app = createApp({ /* your root component */ })
+ */
+// Install the store instance as a plugin
+/* app.use(store) */

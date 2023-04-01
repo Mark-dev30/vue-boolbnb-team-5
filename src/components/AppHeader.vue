@@ -5,6 +5,8 @@ import { store } from '../store'
 export default {
     data() {
         return {
+            string: '',
+            text: '',
             store,
             apartments: [],
             researchPosition: {},
@@ -60,9 +62,9 @@ export default {
                 }
             });
         },
-        getSearch(parametro) {
-            this.getRadiusCenter(parametro)
-            // this.getConfrontProperty()
+        search() {
+            this.string = this.text
+            this.$store.dispatch('setString', this.text);
         }
     },
     mounted() {
@@ -75,7 +77,10 @@ export default {
     <header class="container-fluid">
         <div class="container h-100 d-flex justify-content-between align items-center">
             <img src="https://dieselpunkcore.com/wp-content/uploads/2014/06/logo-placeholder.png" alt="">
-            <AppSearch @buttonClick="getSearch"></AppSearch>
+            <!-- search -->
+            <div class="container-search d-flex align-items-center gap-3">
+                <input class="form-control" type="text" v-model="value" @keyup.enter="$emit('search', searchText)">
+            </div>
         </div>
     </header>
 
