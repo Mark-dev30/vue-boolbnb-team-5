@@ -63,8 +63,8 @@ export default {
     },
 
     mounted() {
-        this.getServices()
-        this.PostServices()
+        /* this.getServices()
+        this.PostServices() */
 
     }
 }
