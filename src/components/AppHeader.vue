@@ -8,7 +8,8 @@ export default {
             store,
             apartments: [],
             researchPosition: {},
-            databaseLocations: []
+            databaseLocations: [],
+            value: ''
         }
     },
     components: {
@@ -21,12 +22,27 @@ export default {
             }).then((response) => {
 
                 if (response.data.success) {
-                    console.log(response)
+
+                    store.apartmentList = response.data.filteredList
+
                 }
 
             });
-        }
+        },
+        getString(param) {
+            if (param != '') {
+                let str = param
+                let strReplace = str.replace(/ +/g, "%20");
+                this.getSearch(strReplace)
+
+            }
+            else {
+                let error = 'inserisci qualcosa'
+                return error
+            }
+        },
     },
+
     /* methods: {
         getRadiusCenter(parametro) {
             let newUrl = `${store.searchUrlFirst}${parametro}${store.searchUrlSecond}${store.apikey}`
@@ -79,7 +95,7 @@ export default {
         }
     }, */
     mounted() {
-        /* this.getApartments() */
+
     }
 }
 </script>
@@ -88,7 +104,13 @@ export default {
     <header class="container-fluid">
         <div class="container h-100 d-flex justify-content-between align items-center">
             <img src="https://dieselpunkcore.com/wp-content/uploads/2014/06/logo-placeholder.png" alt="">
-            <AppSearch @buttonClick="getSearch"></AppSearch>
+            <div class="container-search d-flex align-items-center gap-3">
+                <input class="form-control" type="text" v-model="value" @keyup.enter="getString(value)">
+                <router-link :to="{ name: 'apartment_list'}" class="btn btn-primary"
+                    @click="getString(value)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </router-link>
+            </div>
         </div>
     </header>
 
