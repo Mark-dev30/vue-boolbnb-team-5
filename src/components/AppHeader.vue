@@ -8,17 +8,46 @@ export default {
             store,
             apartments: [],
             researchPosition: {},
-            databaseLocations: []
+            databaseLocations: [],
+            value: ''
         }
     },
     components: {
         AppSearch
     },
     methods: {
+        getSearch(a) {
+            axios.post(`${this.store.baseUrl}/api/apartments`, {
+                street: a,
+            }).then((response) => {
+
+                if (response.data.success) {
+
+                    store.apartmentList = response.data.filteredList
+
+                }
+
+            });
+        },
+        getString(param) {
+            if (param != '') {
+                let str = param
+                let strReplace = str.replace(/ +/g, "%20");
+                this.getSearch(strReplace)
+
+            }
+            else {
+                let error = 'inserisci qualcosa'
+                return error
+            }
+        },
+    },
+
+    /* methods: {
         getRadiusCenter(parametro) {
             let newUrl = `${store.searchUrlFirst}${parametro}${store.searchUrlSecond}${store.apikey}`
             axios.get(newUrl).then((response) => {
-                // let i
+                
                 this.researchPosition = response.data.results[0].position
                 this.ConfrontProperty()
             })
@@ -35,7 +64,7 @@ export default {
             })
             AptString = arrayApt.toString()
             radiusUrl = `https://api.tomtom.com/search/2/geometryFilter.json?geometryList=%5B%7B%22type%22%3A%22CIRCLE%22%2C%20%22position%22%3A%22${this.researchPosition.lat}%2C%20${this.researchPosition.lon}%22%2C%20%22radius%22%3A20000%7D%2C%20%7B%22type%22%3A%22POLYGON%22%2C%20%22vertices%22%3A%5B%2237.7524152343544%2C%20-122.43576049804686%22%2C%20%2237.70660472542312%2C%20-122.43301391601562%22%2C%20%2237.712059855877314%2C%20-122.36434936523438%22%2C%20%2237.75350561243041%2C%20-122.37396240234374%22%5D%7D%5D&poiList=%5B${AptString}%5D&key=${store.apikey}`
-            /* console.log(radiusUrl) */
+            
             axios.get(radiusUrl).then((response) => {
                 let radiusUrl_results = response.data.results
                 let j
@@ -56,17 +85,17 @@ export default {
             axios.get(`${store.baseUrl}/api/apartments`).then((response) => {
                 if (response.data.success) {
                     this.apartments = response.data.apartments.data
-                    /* console.log(this.apartments) */
+                    
                 }
             });
         },
         getSearch(parametro) {
             this.getRadiusCenter(parametro)
-            // this.getConfrontProperty()
+            
         }
-    },
+    }, */
     mounted() {
-        this.getApartments()
+
     }
 }
 </script>
@@ -75,7 +104,13 @@ export default {
     <header class="container-fluid">
         <div class="container h-100 d-flex justify-content-between align items-center">
             <img src="https://dieselpunkcore.com/wp-content/uploads/2014/06/logo-placeholder.png" alt="">
-            <AppSearch @buttonClick="getSearch"></AppSearch>
+            <div class="container-search d-flex align-items-center gap-3">
+                <input class="form-control" type="text" v-model="value" @keyup.enter="getString(value)">
+                <router-link :to="{ name: 'apartment_list'}" class="btn btn-primary"
+                    @click="getString(value)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </router-link>
+            </div>
         </div>
     </header>
 
