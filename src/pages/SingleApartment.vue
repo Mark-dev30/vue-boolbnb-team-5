@@ -1,9 +1,13 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import Map from '../components/Map.vue';
 
 export default {
     name: 'SingleApartment',
+    components:{
+        Map,
+    },
     data() {
         return {
             store,
@@ -68,6 +72,7 @@ export default {
             </div>
         </div>
     </div>
+    <Map />
 </template>
 
 <style lang="">
