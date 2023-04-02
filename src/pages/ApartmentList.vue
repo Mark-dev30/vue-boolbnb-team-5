@@ -64,7 +64,7 @@ export default {
 
     mounted() {
         this.getServices()
-        this.PostServices()
+        /* this.PostServices() */
 
     }
 }
@@ -73,8 +73,8 @@ export default {
     <div class="container">
         <div class="row ">
             <div class="col-9 d-flex flex-wrap justify-content-center">
-                <div class="card m-2 border-0" style="width: 18rem;" v-for="(apartment, index) in filterApartment" :key="apartment.id">
-                    <ApartmentCard :apartment="apartment[0]" />
+                <div class="card m-2 border-0" style="width: 18rem;" v-for="(apartment, index) in store.apartmentList" :key="apartment.id">
+                    <ApartmentCard :apartment="apartment" />
                 </div>
             </div>
             <div class="col-3 d-flex flex-wrap justify-content-center ">
@@ -95,7 +95,7 @@ export default {
                     <label for="" class="form-label">Seleziona i servizi</label>
                     <div v-for="service in services">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="">
+                            <input class="form-check-input" type="checkbox" :value="service.id" name="">
                             <label class="form-check-label">
                                 <i :class="service.class_icon"></i>
                                 {{service.name}}
