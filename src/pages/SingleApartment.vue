@@ -2,6 +2,8 @@
 import { store } from '../store';
 import axios from 'axios';
 
+import SingleApartmentFormMessage from '../components/SingleApartmentFormMessage.vue';
+
 export default {
     name: 'SingleApartment',
     data() {
@@ -9,6 +11,9 @@ export default {
             store,
             apartment: []
         }
+    },
+    components:{
+        SingleApartmentFormMessage
     },
     mounted() {
         axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
@@ -68,6 +73,11 @@ export default {
             </div>
         </div>
     </div>
+
+
+
+
+    <SingleApartmentFormMessage :apartment_id='apartment.id'/>
 </template>
 
 <style lang="">
