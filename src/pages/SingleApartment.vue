@@ -13,7 +13,6 @@ export default {
     mounted() {
         axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
             this.apartment = response.data.apartment
-            console.log(response)
         })
     }
 }
