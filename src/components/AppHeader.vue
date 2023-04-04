@@ -33,6 +33,7 @@ export default {
             if (param != '') {
                 let str = param
                 let strReplace = str.replace(/ +/g, "%20");
+                store.street = strReplace
                 this.getSearch(strReplace)
 
             }
