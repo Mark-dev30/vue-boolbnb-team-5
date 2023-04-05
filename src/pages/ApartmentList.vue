@@ -48,9 +48,8 @@ export default {
             }).then((response) => {
 
                 if (response.data.success) {
-                    console.log(response.data.prova)
+                    console.log(response.data)
                     store.apartmentList = response.data.prova
-                    console.log(store.apartmentList)
 
                 }
 
@@ -104,7 +103,7 @@ export default {
             <div class="col-3 d-flex flex-wrap justify-content-center ">
                 <div class="my-3">
                     <label for="" class="form-label">Inserisci Raggio KM</label>
-                    <input type="range" id="range" class="form-range" min="10" max="50" step="10" name="range" v-model='range'>
+                    <input type="range" id="range" class="form-range" min="0" max="50" step="10" name="range" v-model='range'>
                 </div>
 
                 <div class="my-3">
