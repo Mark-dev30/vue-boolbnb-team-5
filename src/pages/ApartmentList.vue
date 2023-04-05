@@ -89,6 +89,7 @@ export default {
 
     mounted() {
         this.getServices()
+        /* this.PostServices() */
     }
 }
 </script>

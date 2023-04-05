@@ -1,11 +1,15 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import Map from '../components/Map.vue';
 
 import SingleApartmentFormMessage from '../components/SingleApartmentFormMessage.vue';
 
 export default {
     name: 'SingleApartment',
+    components:{
+        Map,
+    },
     data() {
         return {
             store,
@@ -73,8 +77,7 @@ export default {
         </div>
     </div>
 
-
-
+    <Map />
 
     <SingleApartmentFormMessage :apartment_id='apartment.id'/>
 </template>

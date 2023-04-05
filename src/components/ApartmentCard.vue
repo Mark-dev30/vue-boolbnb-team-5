@@ -11,13 +11,23 @@ export default {
         return {
             store
         }
-    }
+    },
+    /* mounted() {
+        this.getLatAndLon();
+    }, */
+    methods: {
+        getLatAndLon(apartment){
+            console.log(apartment)
+            store.latitude = apartment.latitude;
+            store.longitude = apartment.longitude;
+        }
+    },
 }
 </script>
 <template lang="">
     <div class="h-same">
         <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug }}">
-            <img :src="apartment.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'" alt="" class="img-fluid h-17 rounded-4">
+            <img :src="apartment.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'" alt="" class="img-fluid h-17 rounded-4" @click='getLatAndLon(apartment)'>
 
         </router-link>
     </div>
