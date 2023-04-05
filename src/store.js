@@ -6,6 +6,8 @@ export const store = reactive({
     searchUrlSecond: '.json?storeResult=false&countrySet=IT&language=it-IT&view=Unified&key=',
     apartmentList: [],
     latitude: '',
-    longitude: ''
+    longitude: '',
+    street: ''
+
 
 })

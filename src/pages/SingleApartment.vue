@@ -3,6 +3,8 @@ import { store } from '../store';
 import axios from 'axios';
 import Map from '../components/Map.vue';
 
+import SingleApartmentFormMessage from '../components/SingleApartmentFormMessage.vue';
+
 export default {
     name: 'SingleApartment',
     components:{
@@ -14,10 +16,12 @@ export default {
             apartment: []
         }
     },
+    components:{
+        SingleApartmentFormMessage
+    },
     mounted() {
         axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
             this.apartment = response.data.apartment
-            /* console.log(response) */
         })
     }
 }
@@ -72,7 +76,10 @@ export default {
             </div>
         </div>
     </div>
+
     <Map />
+
+    <SingleApartmentFormMessage :apartment_id='apartment.id'/>
 </template>
 
 <style lang="">
