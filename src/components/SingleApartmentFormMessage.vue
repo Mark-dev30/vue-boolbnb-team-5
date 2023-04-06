@@ -85,41 +85,41 @@ export default {
         <div class="offcanvas offcanvas-bottom my_canvas" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
             <div class="row justify-content-center">
                 <div class="col p-4">
+                    <div class='pb-5 d-flex justify-content-center'>
+                        <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Chiudi</button>
+                    </div>
                     <form ref='form' id="form" @submit.prevent='sendMessage(this.formData)'>
                         <div class="mb-3">
-                            <input ref='name' id='name' type="text" class="form-control" placeholder="name" aria-label="name" aria-describedby="addon-wrapping" v-model='formData.name' @keyup='cleanErr'  @blur='v$.name.$touch()'>
+                            <input ref='name' id='name' type="text" class="form-control" placeholder="Nome" aria-label="name" aria-describedby="addon-wrapping" v-model='formData.name' @keyup='cleanErr'  @blur='v$.name.$touch()'>
                             <div v-for='error in v$.name.$errors' :key='error.$uid'>
                                 <div class="error alert alert-danger mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input ref='surname' id='surname' type="text" class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="addon-wrapping" v-model='formData.surname' @keyup='cleanErr' @blur='v$.surname.$touch()'>
+                            <input ref='surname' id='surname' type="text" class="form-control" placeholder="Cognome" aria-label="Surname" aria-describedby="addon-wrapping" v-model='formData.surname' @keyup='cleanErr' @blur='v$.surname.$touch()'>
                             <div v-for='error in v$.surname.$errors' :key='error.$uid'>
                                 <div class="error alert alert-danger mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                        <!--  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            @keyup='isValidEmail(this.email)' -->
-                            <input ref='email' id='email' type="email" class="form-control" placeholder="name@example.com" v-model='formData.email' @keyup='cleanErr' @blur='v$.email.$touch()'>
+                            <input ref='email' id='email' type="email" class="form-control" placeholder="@mail" v-model='formData.email' @keyup='cleanErr' @blur='v$.email.$touch()'>
                             <div v-for='error in v$.email.$errors' :key='error.$uid'>
                                 <div class="error alert alert-danger mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea ref='description' id='description' class="form-control" rows="3" v-model='formData.description' @keyup='cleanErr' @blur='v$.description.$touch()'></textarea>
+                            <textarea placeholder="Scrivi un messaggio" ref='description' id='description' class="form-control" rows="3" v-model='formData.description' @keyup='cleanErr' @blur='v$.description.$touch()'></textarea>
                             <div v-for='error in v$.description.$errors' :key='error.$uid'>
                                 <div class="error alert alert-danger mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <!-- button -->
-                        <div class="mb-3">
-                            <button type='submit' class="btn btn-primary"  >Submit</button>
+                        <div class="mb-3 d-flex justify-content-end">
+                            <button type='submit' class="btn my_btn"  >Invia</button>
                         </div>
                     </form>
                     <div v-if='formSent'>
-                        <div class='message_success bg-gradient'>
+                        <div class='message_success bg-gradient text-center'>
                             <h3>Messaggio inviato con successo!</h3>
                         </div>
                     </div>
@@ -136,11 +136,18 @@ export default {
         justify-content: center;
     }
 
+
+
     .my_btn{
         background-color: #02CCBC;
         color:white;
         font-weight: bold;
         font-size: 24px;
+        &:hover{
+            color: #02CCBC;
+            background-color: white;
+            border: 1px #02CCBC solid;
+        }
     }
 
     .my_canvas{
@@ -154,7 +161,7 @@ export default {
         color: white;
         background-color:#02CCBC;
         animation: success_message 3s;
-        animation-delay: 3s;
+        animation-delay: 2s;
     }
 
     @keyframes success_message {
@@ -162,7 +169,7 @@ export default {
         to {filter: opacity(0);}
     }
 
-    @media (min-width: 785px){
+    @media (min-width: 500px){
         .button_contact_container{
             justify-content: start;
         } 
