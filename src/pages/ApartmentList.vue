@@ -183,6 +183,11 @@ export default {
                         </div>
                     </div>
                 </div>
+                <div class="my-3">
+                    <button class="btn btn-primary" @click="getFilter">
+                        cerca
+                    </button>
+                </div>
             </div>
         </div>
     </div>

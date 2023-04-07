@@ -1,7 +1,11 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+
 import ApartmentCard from '../components/ApartmentCard.vue';
+
+import Jumbotron from '../components/Jumbotron.vue';
+import Advertising from '../components/Advertising.vue';
 export default {
     name: 'HomePage',
     components: {
@@ -12,10 +16,13 @@ export default {
             store,
             carmela: [],
             showModal: false
-
         }
     },
 
+    components: {
+        Jumbotron,
+        Advertising
+    },
 
     computed: {
 
@@ -55,6 +62,8 @@ export default {
             </div>
         </div>
     </div>
+    <Jumbotron></Jumbotron>
+    <Advertising></Advertising>
 </template>
 
 <style lang="">
