@@ -6,6 +6,10 @@ import SingleApartmentFormMessage from '../components/SingleApartmentFormMessage
 
 export default {
     name: 'SingleApartment',
+    components: {
+        Map,
+    },
+
     data() {
         return {
             store,

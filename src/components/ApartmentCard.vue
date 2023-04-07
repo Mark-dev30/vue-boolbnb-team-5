@@ -1,5 +1,5 @@
 <script>
-import {store} from "../store";
+import { store } from "../store";
 
 export default {
     name: 'ApartmentCard',
@@ -17,15 +17,16 @@ export default {
         this.getLatAndLon();
     }, */
     methods: {
-        getLatAndLon(apartment){
+        getLatAndLon(apartment) {
             console.log(apartment)
             store.latitude = apartment.latitude;
             store.longitude = apartment.longitude;
         }
     },
 
+
     mounted() {
-        console.log(this.apartment)
+        
     },
 }
 </script>
@@ -59,7 +60,20 @@ export default {
     </div>
 </template>
 
+
+
+
+
 <style lang="scss" scoped>
+
+.h-same {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.h-17 {
+    height: 17rem;
+}
 
     .wh-card {
         width: 18rem;
@@ -86,5 +100,4 @@ export default {
         top: 0;
         left: 0;
     }
-
 </style>
