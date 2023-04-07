@@ -70,7 +70,7 @@ export default {
                         <!-- Modal -->
                         <div class="modal fade modal-xl my_modal" id="open_img" tabindex="-1" aria-labelledby="open_imgLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content my_content">
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
@@ -207,11 +207,15 @@ export default {
     margin-bottom: 2rem;
 }
 .my_modal{
-    max-height: 96vh;
+    max-height: 96vh;   
+
+    .my_content{
+        height: 50%;
+    }
     .my_modal_img{
         margin: 0 auto;
-        max-width: 100%;
-        max-height: 100%;
+        max-width: 75%;
+        aspect-ratio: 4 / 3;
     }
 }
 
