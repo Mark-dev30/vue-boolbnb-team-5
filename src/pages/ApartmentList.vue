@@ -133,7 +133,7 @@ export default {
                 </div>
                 <div class="my-3">
                     <button class="btn btn-primary" @click="getFilter">
-                        cliccami
+                        cerca
                     </button>
                 </div>
             </div>
