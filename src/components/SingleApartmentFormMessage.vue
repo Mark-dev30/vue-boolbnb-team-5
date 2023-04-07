@@ -29,7 +29,8 @@ export default {
                 email: helpers.withMessage(`L'email inserita non è valida`, email)
                 },
             description: {
-                required: helpers.withMessage('Il testo del messaggio non può essere vuoto', required)
+                required: helpers.withMessage('Il testo del messaggio non può essere vuoto', required),
+                maxLength: helpers.withMessage(({ $params }) => `Il testo non può superare i ${$params.max} caratteri`, maxLength(500))
             },
         }
 
@@ -68,7 +69,7 @@ export default {
                         this.formData.email = '';
                         this.formData.description = '';
                         this.v$.$reset()
-                        setTimeout(this.formSentReset, 6000);
+                        setTimeout(this.formSentReset, 5000);
                     }
                 });
 
@@ -103,25 +104,25 @@ export default {
                         <div class="mb-3">
                             <input ref='name' id='name' type="text" class="form-control" placeholder="Nome" aria-label="name" aria-describedby="addon-wrapping" v-model='formData.name' @keydown='cleanErr'  @blur='v$.name.$touch()'>
                             <div v-for='error in v$.name.$errors' :key='error.$uid'>
-                                <div class="error alert alert-danger mt-2">{{error.$message}}</div>
+                                <div class="error alert alert-danger fs-6 mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <input ref='surname' id='surname' type="text" class="form-control" placeholder="Cognome" aria-label="Surname" aria-describedby="addon-wrapping" v-model='formData.surname' @keydown='cleanErr' @blur='v$.surname.$touch()'>
                             <div v-for='error in v$.surname.$errors' :key='error.$uid'>
-                                <div class="error alert alert-danger mt-2">{{error.$message}}</div>
+                                <div class="error alert alert-danger fs-6 mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <input ref='email' id='email' type="email" class="form-control" placeholder="@mail" v-model='formData.email' @keydown='cleanErr' @blur='v$.email.$touch()'>
                             <div v-for='error in v$.email.$errors' :key='error.$uid'>
-                                <div class="error alert alert-danger mt-2">{{error.$message}}</div>
+                                <div class="error alert alert-danger fs-6 mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <textarea placeholder="Scrivi un messaggio" ref='description' id='description' class="form-control" rows="3" v-model='formData.description' @keydown='cleanErr' @blur='v$.description.$touch()'></textarea>
                             <div v-for='error in v$.description.$errors' :key='error.$uid'>
-                                <div class="error alert alert-danger mt-2">{{error.$message}}</div>
+                                <div class="error alert alert-danger fs-6 mt-2">{{error.$message}}</div>
                             </div>
                         </div>
                         <!-- button -->
