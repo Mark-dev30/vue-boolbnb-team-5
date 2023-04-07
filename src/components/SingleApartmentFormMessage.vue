@@ -181,9 +181,7 @@ export default {
     }
 
     @media (min-width: 500px){
-        .button_contact_container{
-            justify-content: start;
-        } 
+
     }
 
 

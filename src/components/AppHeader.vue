@@ -177,7 +177,7 @@ export default {
     </header>
 
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 header {
     height: 85px;
     background-color: #fff;
