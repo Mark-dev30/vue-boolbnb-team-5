@@ -1,5 +1,5 @@
 <script>
-import {store} from "../store";
+import { store } from "../store";
 
 export default {
     name: 'ApartmentCard',
@@ -16,11 +16,14 @@ export default {
         this.getLatAndLon();
     }, */
     methods: {
-        getLatAndLon(apartment){
+        getLatAndLon(apartment) {
             console.log(apartment)
             store.latitude = apartment.latitude;
             store.longitude = apartment.longitude;
         }
+    },
+    mounted() {
+
     },
 }
 </script>
@@ -39,14 +42,12 @@ export default {
 </template>
 
 <style lang="scss">
+.h-same {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
 
-    .h-same {
-        width: 100%;
-        aspect-ratio : 1 / 1;
-    }
-
-    .h-17 {
-        height: 17rem;
-    }
-
+.h-17 {
+    height: 17rem;
+}
 </style>

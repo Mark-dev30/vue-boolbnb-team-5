@@ -22,7 +22,6 @@ export default {
             }).then((response) => {
 
                 if (response.data.success) {
-
                     store.apartmentList = response.data.filteredList
 
                 }

@@ -7,7 +7,7 @@ import SingleApartmentFormMessage from '../components/SingleApartmentFormMessage
 
 export default {
     name: 'SingleApartment',
-    components:{
+    components: {
         Map,
     },
     data() {
@@ -16,7 +16,7 @@ export default {
             apartment: []
         }
     },
-    components:{
+    components: {
         SingleApartmentFormMessage
     },
     mounted() {
