@@ -76,6 +76,7 @@ export default {
 
     .our-card {
         transition: transform 500ms ease;
+        object-fit: cover;
     }
     .our-card:hover{
         transform: scale(1.05);
