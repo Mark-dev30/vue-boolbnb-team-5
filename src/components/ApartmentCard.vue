@@ -1,5 +1,5 @@
 <script>
-import {store} from "../store";
+import { store } from "../store";
 
 export default {
     name: 'ApartmentCard',
@@ -17,15 +17,15 @@ export default {
         this.getLatAndLon();
     }, */
     methods: {
-        getLatAndLon(apartment){
-            console.log(apartment)
+        getLatAndLon(apartment) {
             store.latitude = apartment.latitude;
             store.longitude = apartment.longitude;
         }
     },
 
+
     mounted() {
-        console.log(this.apartment)
+
     },
 }
 </script>
@@ -59,31 +59,44 @@ export default {
     </div>
 </template>
 
+
+
+
+
 <style lang="scss" scoped>
+.h-same {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
 
-    .wh-card {
-        width: 18rem;
-        height: 17rem;
-    }
+.h-17 {
+    height: 17rem;
+}
 
-    .bg-dark-transparent{
-        background-color: rgb(0, 0, 0, 0.5);
-    }
+.wh-card {
+    width: 18rem;
+    height: 17rem;
+}
 
-    .show:hover {
-        cursor: pointer;
-    }
+.bg-dark-transparent {
+    background-color: rgb(0, 0, 0, 0.5);
+}
 
-    .our-card {
-        transition: transform 500ms ease;
-    }
-    .our-card:hover{
-        transform: scale(1.05);
-    }
+.show:hover {
+    cursor: pointer;
+}
 
-    .top-0 {
-        top: 0;
-        left: 0;
-    }
+.our-card {
+    transition: transform 500ms ease;
+    object-fit: cover;
+}
 
+.our-card:hover {
+    transform: scale(1.05);
+}
+
+.top-0 {
+    top: 0;
+    left: 0;
+}
 </style>

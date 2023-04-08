@@ -9,7 +9,8 @@ export default {
             apartments: [],
             researchPosition: {},
             databaseLocations: [],
-            value: ''
+            value: '',
+            loading: false
         }
     },
     components: {
@@ -22,9 +23,8 @@ export default {
             }).then((response) => {
 
                 if (response.data.success) {
-
                     store.apartmentList = response.data.filteredList
-
+                    this.loading = false
                 }
 
             });
@@ -43,6 +43,11 @@ export default {
                 return error
             }
         },
+        isLoaded(a) {
+            store.apartmentList = []
+            this.loading = true
+            setTimeout(this.getString(a), 3000)
+        }
     },
 
     /* methods: {
@@ -113,8 +118,8 @@ export default {
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </router-link> -->
                 <div class="searchbar d-none d-md-flex">
-                    <input class="search_input" type="text" v-model="value" @keyup.enter="getString(value)" placeholder="Cerca...">
-                    <div class="search_icon" @click="getString(value)"> 
+                    <input class="search_input" type="text" v-model="value" @keyup.enter="isLoaded(value)" placeholder="Cerca...">
+                    <div class="search_icon" @click="isLoaded(value)"> 
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
@@ -142,8 +147,8 @@ export default {
                         </button>
                         <ul class="dropdown-menu mobile-nav px-4">
                             <li class="searchbar d-none d-md-flex">
-                                <input class="search_input" type="text" v-model="value" @keyup.enter="getString(value)" placeholder="Cerca...">
-                                <div class="search_icon" @click="getString(value)"> 
+                                <input class="search_input" type="text" v-model="value" @keyup.enter="isLoaded(value)" placeholder="Cerca...">
+                                <div class="search_icon" @click="isLoaded(value)"> 
                                     <i class="fas fa-search"></i>
                                 </div>
                             </li>
@@ -174,8 +179,22 @@ export default {
                 </div>
             </div> -->
         </div>
+        
     </header>
-
+    <div class="container" v-if="this.loading == true">
+        <div class="row loader-header"  >
+            <div class="col-sm-12 col-lg-3" v-for="n in 8" >
+                <div class="card-loader m-2">
+                    <div class="image-loader"></div>
+                    <div class="content-loader">
+                        <h2 class="h2-loader"></h2>
+                        <p class="p-loader"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </template>
 <style lang="scss" scoped>
 header {
@@ -325,6 +344,48 @@ li :hover {
         padding: 5px 20px;
         border-radius: 50px;
     }
+
+}
+
+/* Loader */
+.card-loader {
+    width: 290px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+.image-loader,
+.h2-loader,
+.p-loader {
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.image-loader {
+    height: 17rem;
+    border-radius: 1rem;
+}
+
+.content-loader {
+    margin: 23px 10px 0 0;
+}
+
+.h2-loader {
+    width: 80%;
+    height: 1rem;
+}
+
+.p-loader {
+    width: 50%;
+    height: 1rem;
 
 }
 </style>

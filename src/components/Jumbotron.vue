@@ -9,7 +9,7 @@ export default {
     <div class="row h-100 g-0">
       <div class="col-12 h-100 d-flex justify-content-around align-items-center">
         <div class="container">
-          <h1 class="text-white text-center">Per le tue vacanze in italia, come vuoi, dove vuoi!</h1>
+          <h1 class="text-white text-center">Per le tue vacanze in Italia, come vuoi, dove vuoi!</h1>
         </div>
       </div>
     </div>
