@@ -26,6 +26,9 @@ export default {
         
     },
     methods:{
+        goBack() {
+        this.$router.go(-1)
+        },
         axiosCall(){
             axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
             this.apartment = response.data.apartment
@@ -71,6 +74,15 @@ export default {
 }
 </script>
 <template lang="">
+    <div class='container'>
+        <div class="row">
+            <div class="col">
+                <button type='button' class='btn my_btn my-4' @click="goBack">
+                  Torna alla lista 
+                </button>
+            </div>
+        </div>
+    </div>
     <div v-if='loading'>
         <div class='d-flex justify-content-center'>
             <lord-icon
@@ -84,7 +96,7 @@ export default {
     </div>
     <div v-else>
         <div class="container apt_container">
-            <div class="row py-5">
+            <div class="row pb-5">
                 <div class="col-md-8">
                     <div class="d-flex justify-content-center">
                         <div class='d-block d-md-none'>
@@ -297,6 +309,18 @@ export default {
         @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+        }
+
+        .my_btn{
+        background-color: #02CCBC;
+        color:white;
+        font-weight: bold;
+        font-size: 24px;
+        &:hover{
+            color: #02CCBC;
+            background-color: white;
+            border: 1px #02CCBC solid;
+        }
         }
 
 /* loader 2 */
