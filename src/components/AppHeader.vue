@@ -120,8 +120,8 @@ export default {
                 </div>
                 <div class="login-container searchbar d-none d-md-flex align-items-center justify-content-center">
                     <div class="d-flex align-items-center">
-                        <div class="search_icon">
-                            <i class="fa-regular fa-user"></i>
+                        <div class="search_icon user">
+                            <a href="http://127.0.0.1:8000/admin/dashboard"><i class="fa-regular fa-user"></i></a>
                         </div>
                         <div class="dropdown">
                             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -177,7 +177,7 @@ export default {
     </header>
 
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 header {
     height: 85px;
     background-color: #fff;
@@ -187,6 +187,10 @@ header {
     img {
         width: 130px;
     }
+}
+
+.user a {
+    color: #fff;
 }
 
 .searchbar {
@@ -218,6 +222,11 @@ header {
     color: #02CCBC;
 }
 
+.search_icon:hover a {
+    background: white;
+    color: #02CCBC;
+}
+
 .search_icon {
     height: 30px;
     width: 30px;
@@ -230,6 +239,10 @@ header {
     background-color: #02CCBC;
     text-decoration: none;
     cursor: pointer;
+
+    a {
+        color: #fff;
+    }
 }
 
 .search-mobile {
@@ -251,6 +264,10 @@ header {
 li :hover {
     background-color: #02CCBC !Important;
     color: #fff !Important;
+
+    input {
+        color: #000;
+    }
 }
 
 .btn.show,
@@ -269,7 +286,9 @@ li :hover {
     }
 
     .searchbar {
+        color: #000;
         padding: 0;
+        margin: 0 20px;
     }
 
     li :hover {
@@ -284,11 +303,15 @@ li :hover {
     padding: 20px 0 !important;
     border-bottom: 1px solid #ebebeb !important;
     border-radius: 0 !important;
-    display: flex;
+    // display: flex;
 
     li {
         padding: 0 10px;
         display: flex !important;
+
+        input {
+            color: #000;
+        }
 
         a {
             display: flex !important;
