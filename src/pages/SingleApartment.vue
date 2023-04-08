@@ -21,6 +21,7 @@ export default {
         SingleApartmentFormMessage,
     },
     mounted() {
+        this.scrollTop();
         this.loading = true;
         this.letLoad()
         
@@ -69,6 +70,9 @@ export default {
             var marker = new tt.Marker({color: color, scale: 1, draggable: true }).setLngLat(location).addTo(map);
             var popup = new tt.Popup({offset: popupOffsets}).setHTML('Siamo qui!');
             marker.setPopup(popup).togglePopup();
+        },
+        scrollTop() {
+          window.scrollTo(0, 0);
         }
     }
 }
