@@ -18,7 +18,6 @@ export default {
     }, */
     methods: {
         getLatAndLon(apartment) {
-            console.log(apartment)
             store.latitude = apartment.latitude;
             store.longitude = apartment.longitude;
         }
@@ -26,7 +25,7 @@ export default {
 
 
     mounted() {
-        
+
     },
 }
 </script>
@@ -65,7 +64,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .h-same {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -75,29 +73,30 @@ export default {
     height: 17rem;
 }
 
-    .wh-card {
-        width: 18rem;
-        height: 17rem;
-    }
+.wh-card {
+    width: 18rem;
+    height: 17rem;
+}
 
-    .bg-dark-transparent{
-        background-color: rgb(0, 0, 0, 0.5);
-    }
+.bg-dark-transparent {
+    background-color: rgb(0, 0, 0, 0.5);
+}
 
-    .show:hover {
-        cursor: pointer;
-    }
+.show:hover {
+    cursor: pointer;
+}
 
-    .our-card {
-        transition: transform 500ms ease;
-        object-fit: cover;
-    }
-    .our-card:hover{
-        transform: scale(1.05);
-    }
+.our-card {
+    transition: transform 500ms ease;
+    object-fit: cover;
+}
 
-    .top-0 {
-        top: 0;
-        left: 0;
-    }
+.our-card:hover {
+    transform: scale(1.05);
+}
+
+.top-0 {
+    top: 0;
+    left: 0;
+}
 </style>
