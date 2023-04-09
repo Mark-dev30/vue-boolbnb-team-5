@@ -136,7 +136,7 @@ a {
     border-radius: 0 0 15px 15px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 835px) {
     .our-card {
         width: calc(100% / 3 - 1rem);
         transition: transform 500ms ease;
