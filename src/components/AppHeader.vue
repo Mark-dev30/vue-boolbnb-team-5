@@ -140,7 +140,7 @@ export default {
                             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-bars"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end mt-1">
+                            <ul class="dropdown-menu dropdown-menu-end desk-menu mt-1">
                                 <li><a class="dropdown-item" href="http://127.0.0.1:8000/login">Log-in</a></li>
                                 <li><a class="dropdown-item" href="http://127.0.0.1:8000/register">Registrati</a></li>
                             </ul>
@@ -286,7 +286,7 @@ header {
     }
 }
 
-li :hover {
+.desk-menu li :hover {
     background-color: #02CCBC !Important;
     color: #fff !Important;
 
@@ -316,9 +316,14 @@ li :hover {
         margin: 0 20px;
     }
 
-    li :hover {
-        background-color: #fff !Important;
-    }
+    // li :hover {
+    //     background-color: transparent !Important;
+    // }
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background-color: transparent;
 }
 
 .mobile-nav {
