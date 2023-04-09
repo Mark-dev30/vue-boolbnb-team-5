@@ -14,13 +14,16 @@ export default {
         return {
             store,
             apartment: [],
-            loading: true
+            loading: true,
+            region: '',
+            address: ''
         }
     },
     components:{
         SingleApartmentFormMessage,
     },
     mounted() {
+        this.scrollTop();
         this.loading = true;
         this.letLoad()
         
@@ -29,13 +32,20 @@ export default {
         goBack() {
         this.$router.go(-1)
         },
+        getaddress(lat, lon){
+            axios.get(`https://api.tomtom.com/search/2/reverseGeocode/crossStreet/${lat}%2C${lon}.json?limit=1&spatialKeys=false&radius=1000&allowFreeformNewLine=false&view=Unified&key=sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju`).then((response)=>{
+                console.log(response.data.addresses[0].address.countrySecondarySubdivision)
+                this.region = response.data.addresses[0].address.countrySecondarySubdivision;
+                this.address = response.data.addresses[0].address.crossStreet;
+            })
+        },
         axiosCall(){
             axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
             this.apartment = response.data.apartment
             let latitude = response.data.apartment.latitude
             let longitude = response.data.apartment.longitude
             /* this.latLonToTileZXY(latitude,longitude, 14); */
-            
+            this.getaddress(latitude, longitude);
             this.createMap(longitude, latitude);    
             this.loading = false;
         })
@@ -69,6 +79,9 @@ export default {
             var marker = new tt.Marker({color: color, scale: 1, draggable: true }).setLngLat(location).addTo(map);
             var popup = new tt.Popup({offset: popupOffsets}).setHTML('Siamo qui!');
             marker.setPopup(popup).togglePopup();
+        },
+        scrollTop() {
+          window.scrollTo(0, 0);
         }
     }
 }
@@ -126,6 +139,9 @@ export default {
                         <div>
                             <h1 class='apt_title'><strong>{{ apartment.title }}</strong></h1>
                         </div>
+                        <div class='my_address'>
+                            <strong>Indirizzo:</strong>{{address}}, {{region}}
+                        </div>
                         <div class="">
                             <div class='info_title'>
                                 <strong>PANORAMICA</strong>
@@ -160,6 +176,9 @@ export default {
             <div class='d-block d-md-none'>
                 <div class="p-3 row">
                     <h1 class='apt_title'><strong>{{ apartment.title }}</strong></h1>
+                </div>
+                <div class='ps-3 my_address'>
+                    <strong>Indirizzo:</strong>{{address}}, {{region}}
                 </div>
             </div> 
             <!-- mobile -->
@@ -238,7 +257,7 @@ export default {
 }
 .apt_title{
     font-size:48px;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 .my_modal{
     max-height: 96vh;   
@@ -321,6 +340,11 @@ export default {
             background-color: white;
             border: 1px #02CCBC solid;
         }
+        }
+
+
+        .my_address{
+            margin-bottom: 0.5rem;
         }
 
 /* loader 2 */

@@ -168,7 +168,7 @@ export default {
     </div>
     <!-- Sezione card delle proprietà sponsorizzate     -->
     <div class="mb-0 pb-4 pb-lg-5 mb-lg-3">
-        <Carousel class="slider-prova" :settings="settings" :breakpoints="breakpoints" autoplay="2000" :wrap-around="true"  transition="500" pauseAutoplayOnHover="true">
+        <Carousel class="slider-prova" :settings="settings" :breakpoints="breakpoints" :mouseDrag="true" autoplay="2000" :wrap-around="true"  transition="500" pauseAutoplayOnHover="true">
             <Slide class="py-3" v-for="(element, index) in this.sponsor" :key="index">
                 <SponsorCard :apartment="element"></SponsorCard>
             </Slide>    
