@@ -188,8 +188,8 @@ export default {
             </div> -->
         </div>
     </header>
-    <div class="container mt-5">
-        <div class="row" v-if="this.loading == true" >
+    <div class="container mt-5" v-if="this.loading == true">
+        <div class="row" >
             <div class="col-12 col-md-6 col-lg-3 gap-1" v-for="n in 6" >
                 <div class="card-loader">
                     <div class="image-loader"></div>
