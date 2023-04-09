@@ -28,6 +28,7 @@ export default {
     
     }, */
     methods: {
+        /* CALL AXIOS SERVICES */
         getServices() {
             axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
                 if (response.data.success) {
@@ -37,6 +38,7 @@ export default {
 
             });
         },
+        /* CALL AXIOS MODAL FILTER */
         getFilter() {
             this.loading = true;
             axios.post(`${this.store.baseUrl}/api/apartments/filter`, {
@@ -50,6 +52,7 @@ export default {
             }).then((response) => {
 
                 if (response.data.success) {
+                    console.log(response.data)
                     store.apartmentList = response.data.prova
                     setTimeout(() => {
                         this.loading = false
@@ -60,51 +63,18 @@ export default {
 
             });
         }
-        /* PostServices() {
-            axios.post(`${this.store.baseUrl}/api/apartments`, {
-                name: 'lorenzo',
-                surname: 'ciao'
-            }).then((response) => {
-    
-                if (response.data.success) {
-                    console.log(response)
-                }
-    
-            });
-            
-        }, */
-        /* filterProductsByBed: function (products) {
-            return products.filter(product => product[0].n_bed >= this.n_beds)
-        },
-    
-        filterProductsByRoom: function (products) {
-            return products.filter(product => product[0].n_room >= this.n_rooms)
-        },
-    
-        filterProductsByBathroom: function (products) {
-            return products.filter(product => product[0].n_bathroom >= this.n_bathrooms)
-        },
-    
-        log(message) {
-            console.log(message)
-        } */
     },
-
-
     mounted() {
         this.getServices()
-        /* this.PostServices() */
-
-
-
     }
 }
 </script>
 <template lang="">
     <div class="container">
         <div class="row">
-            <div class="col-12 loader-list" v-if="this.loading == true">
-                <div class="col-3" v-for="n in 6" >
+            <!-- LOADER -->
+            <div class="col-12 d-flex flex-wrap loader-list" v-if="this.loading == true">
+                <div class="col-12 col-md-6 col-lg-3 gap-1" v-for="n in 6" >
                     <div class="card-loader m-2">
                         <div class="image-loader"></div>
                         <div class="content-loader">
@@ -114,6 +84,8 @@ export default {
                     </div>
                 </div>
             </div>
+            <!-- END LOADER -->
+            <!-- ROW TITLE -->
             <div class="col-12" v-else>
                 <div class="row align-items-center my-3 title-result" v-if="store.apartmentList?.length == 0 || store.apartmentList == null ">
                     <div class="col-12 text-center">
@@ -124,10 +96,11 @@ export default {
                     </div>
                     
                 </div>
-                <div class="row my-3  title-result" v-else>
-                    <div class="col-10" >
-                        <h4>I RISULTATI IN BASE ALLA TUA RICERCA SONO {{store.apartmentList.length}}</h4>
+                <div class="row my-3" v-else>
+                    <div class="col-10 " >
+                        <h4 class="title-result">I RISULTATI IN BASE ALLA TUA RICERCA SONO {{store.apartmentList.length}}</h4>
                     </div>
+                    <!-- BUTTON FILTER -->
                     <div class="col-2 text-end pe-0">
                         <button type="button" class="btn btn-filter my_btn me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-sliders"></i> 
@@ -135,26 +108,31 @@ export default {
                         </button>
                     </div>
                 </div>
-                
-                <div class="col-12 d-flex flex-wrap ">
-                    <div class="card m-2 border-0" style="width: 18rem;" v-for="(apartment, index) in store.apartmentList" :key="apartment.id">
-                        <ApartmentCard :apartment="apartment" />
+                <!-- CARDS -->
+                <div class="row row-card">
+                    <div class="col-11 col-md-6 col-lg-3 " v-for="(apartment, index) in store.apartmentList">
+                        <ApartmentCard class="col-12" :apartment="apartment"  :key="apartment.id" />
                     </div>
                 </div>
+                
                 <!-- MODAL -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                        <!-- MODAL CONTENT -->
                         <div class="modal-content">
+                            <!-- MODAL HEADER -->
                             <div class="modal-header">
                                 <button type="button" class="icon-filter" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Filtri</h1>
                             </div>
+                            <!-- MODAL BODY -->
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
+                                            <!-- INPUT RANGE MODAL -->
                                             <div class="col-12">
-                                                <div >
+                                                <div>
                                                     <label for="" class="form-label">Inserisci Raggio KM</label>
                                                     <div class="d-flex align-items-center">
                                                         
@@ -164,6 +142,7 @@ export default {
                                                     
                                                 </div>
                                             </div>
+                                            <!-- INPUT ROOMS MODAL -->
                                             <span class="title-filter">Numero Stanze</span>
                                             <div class="col-12 d-flex padding">
                                                 <div v-for='(number, key) in numbers' class="margin">
@@ -172,6 +151,7 @@ export default {
                                                     <label class="btn-filter btn" :for="'option_room'+ key">{{number}}</label>
                                                 </div>
                                             </div>
+                                            <!-- INPUT BEDS MODAL -->
                                             <span class="title-filter">Numero Letti</span>
                                             <div class="col-12 d-flex">
                                                 <div v-for='(number, key) in numbers' class="margin">
@@ -180,6 +160,7 @@ export default {
                                                     <label class="btn-filter btn" :for="'option_bed'+ key">{{number}}</label>
                                                 </div>
                                             </div>
+                                            <!-- INPUT BATHROOMS MODAL -->
                                             <span class="title-filter">Numero Bagni</span>
                                             <div class="col-12 d-flex">
                                                 <div v-for='(number, key) in numbers' class="margin">
@@ -189,6 +170,7 @@ export default {
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- INPUT SERVICES MODAL -->
                                         <div class="col-12 col-md-6">
                                             <span class="title-filter">Servizi</span>
                                             <div class="row">
@@ -205,6 +187,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
+                            <!-- MODAL BUTTON -->
                             <div class="modal-footer">
                                 <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-modal" @click="getFilter">Mostra Risultati</button>
                             </div>
@@ -216,6 +199,10 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
+.gap-custom {
+    gap: 1rem;
+}
+
 .icon-filter {
     border: 0;
     background: none;
@@ -240,11 +227,8 @@ export default {
     }
 }
 
-@media (max-width: 550px) {
-    .no-result {
-        height: 10rem;
-    }
-}
+
+
 
 .my_btn {
     background-color: #02CCBC;
@@ -317,7 +301,6 @@ export default {
 
 /* Loader */
 .card-loader {
-    width: 290px;
     background: #fff;
     border-radius: 10px;
 }
@@ -355,5 +338,19 @@ export default {
     width: 50%;
     height: 1rem;
 
+}
+
+@media (max-width: 550px) {
+    .no-result {
+        height: 10rem;
+    }
+
+    .row-card {
+        justify-content: center;
+    }
+
+    .title-result {
+        margin-left: 10;
+    }
 }
 </style>

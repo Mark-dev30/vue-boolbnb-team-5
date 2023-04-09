@@ -31,6 +31,7 @@ export default {
         },
         getString(param) {
             if (param != '') {
+                console.log('sono entrato')
                 let str = param
                 let strReplace = str.replace(/ +/g, "%20");
                 store.street = strReplace
@@ -44,9 +45,16 @@ export default {
             }
         },
         isLoaded(a) {
-            store.apartmentList = []
-            this.loading = true
-            setTimeout(this.getString(a), 3000)
+            if (a != '') {
+                store.apartmentList = []
+                this.loading = true
+                setTimeout(this.getString(a), 3000)
+            }
+            else {
+                let error = 'inserisci qualcosa'
+                return error
+            }
+
         }
     },
 
@@ -118,7 +126,7 @@ export default {
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </router-link> -->
                 <div class="searchbar d-none d-md-flex">
-                    <input class="search_input" type="text" v-model="value" @keyup.enter="isLoaded(value)" placeholder="Cerca...">
+                    <input class="search_input" type="text" v-model="value" @keyup.enter="isLoaded(value)" required placeholder="Cerca...">
                     <div class="search_icon" @click="isLoaded(value)"> 
                         <i class="fas fa-search"></i>
                     </div>
@@ -147,7 +155,7 @@ export default {
                         </button>
                         <ul class="dropdown-menu mobile-nav px-4">
                             <li class="searchbar d-none d-md-flex">
-                                <input class="search_input" type="text" v-model="value" @keyup.enter="isLoaded(value)" placeholder="Cerca...">
+                                <input class="search_input form-control" type="text" v-model="value" @keyup.enter="isLoaded(value)"  placeholder="Cerca...">
                                 <div class="search_icon" @click="isLoaded(value)"> 
                                     <i class="fas fa-search"></i>
                                 </div>
@@ -179,12 +187,11 @@ export default {
                 </div>
             </div> -->
         </div>
-        
     </header>
-    <div class="container" v-if="this.loading == true">
-        <div class="row loader-header"  >
-            <div class="col-sm-12 col-lg-3" v-for="n in 8" >
-                <div class="card-loader m-2">
+    <div class="container mt-5">
+        <div class="row" v-if="this.loading == true" >
+            <div class="col-12 col-md-6 col-lg-3 gap-1" v-for="n in 6" >
+                <div class="card-loader">
                     <div class="image-loader"></div>
                     <div class="content-loader">
                         <h2 class="h2-loader"></h2>
@@ -194,7 +201,6 @@ export default {
             </div>
         </div>
     </div>
-    
 </template>
 <style lang="scss" scoped>
 header {
@@ -349,7 +355,6 @@ li :hover {
 
 /* Loader */
 .card-loader {
-    width: 290px;
     background: #fff;
     border-radius: 10px;
 }

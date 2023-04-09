@@ -18,14 +18,12 @@ export default {
     }, */
     methods: {
         getLatAndLon(apartment) {
-            console.log(apartment)
             store.latitude = apartment.latitude;
             store.longitude = apartment.longitude;
         }
     },
 
     mounted() {
-        console.log(this.apartment.services)
     },
 }
 </script>
