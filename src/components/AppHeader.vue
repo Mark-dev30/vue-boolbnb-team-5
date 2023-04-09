@@ -329,7 +329,7 @@ header {
 .mobile-nav {
     width: 100vw;
     border: none !important;
-    margin-top: 24px !important;
+    margin-top: 22px !important;
     padding: 20px 0 !important;
     border-bottom: 1px solid #ebebeb !important;
     border-radius: 0 !important;
