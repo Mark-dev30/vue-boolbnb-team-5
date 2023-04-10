@@ -96,8 +96,8 @@ export default {
                     </div>
                     
                 </div>
-                <div class="row my-3" v-else>
-                    <div class="col-10 " >
+                <div class="row row-result my-3" v-else>
+                    <div class="col-9 col-sm-10 col-result">
                         <h4 class="title-result">I RISULTATI IN BASE ALLA TUA RICERCA SONO {{store.apartmentList.length}}</h4>
                     </div>
                     <!-- BUTTON FILTER -->
@@ -351,6 +351,14 @@ export default {
 
     .title-result {
         margin-left: 10;
+    }
+
+    .row-result {
+        gap: 0.5rem;
+    }
+
+    .col-result {
+        margin-left: 1rem;
     }
 }
 </style>
