@@ -10,7 +10,8 @@ export default {
     data() {
         return {
             store,
-            isVisible: false
+            isVisible: false,
+            distance: null
         }
     },
     /* mounted() {
@@ -22,6 +23,7 @@ export default {
             store.longitude = apartment.longitude;
         }
     },
+
 
     mounted() {
     },
@@ -60,7 +62,16 @@ export default {
             </div>
         </router-link>
         <div class="my-3 mx-2 gap-2 d-flex flex-column align-items-start text-start details">
-            <p class="card-title"><strong>{{ apartment.title }}</strong></p>
+            <div class="w-100 d-flex justify-content-between">
+                <p class="card-title"><strong>{{ apartment.title }}</strong></p>
+                <div class="d-flex">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="ms-1">{{ (Math.round(apartment.distance * 100) / 100).toFixed(1) }} Km</p>
+                </div>
+                    
+            </div>
+            
+
             <div class="d-flex justify-content-between align-items-end w-100">
                 <div class="d-flex">
                     <p class="me-2 mb-0 d-flex" ><i class="fa-solid fa-person-shelter"></i> {{ apartment.n_room }}</p>
@@ -86,6 +97,10 @@ export default {
         height: 18rem;
         object-fit: cover;
     }
+}
+
+.card-title {
+    width: 73%;
 }
 
 .bg-dark-transparent {
