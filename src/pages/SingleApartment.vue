@@ -19,41 +19,42 @@ export default {
             address: ''
         }
     },
-    components:{
+    components: {
         SingleApartmentFormMessage,
     },
     mounted() {
         this.scrollTop();
         this.loading = true;
         this.letLoad()
-        
+
     },
-    methods:{
+    methods: {
         goBack() {
-        this.$router.go(-1)
+            this.$router.go(-1)
         },
-        getaddress(lat, lon){
-            axios.get(`https://api.tomtom.com/search/2/reverseGeocode/crossStreet/${lat}%2C${lon}.json?limit=1&spatialKeys=false&radius=1000&allowFreeformNewLine=false&view=Unified&key=sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju`).then((response)=>{
-                console.log(response.data.addresses[0].address.countrySecondarySubdivision)
-                this.region = response.data.addresses[0].address.countrySecondarySubdivision;
-                this.address = response.data.addresses[0].address.crossStreet;
+        getaddress(lat, lon) {
+            axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${lat}%2C${lon}.json?returnSpeedLimit=false&radius=10000&returnRoadUse=false&allowFreeformNewLine=false&returnMatchType=false&view=Unified&key=sqAC6HGqUo0FuWA7iea7gmbV4KpA2wju`).then((response) => {
+
+                /* console.log(response.data.addresses[0].address.countrySecondarySubdivision) */
+
+                this.address = response.data.addresses[0].address.freeformAddress;
             })
         },
-        axiosCall(){
+        axiosCall() {
             axios.get(`${store.baseUrl}/api/apartments/${this.$route.params.slug}`).then((response) => {
-            this.apartment = response.data.apartment
-            let latitude = response.data.apartment.latitude
-            let longitude = response.data.apartment.longitude
-            /* this.latLonToTileZXY(latitude,longitude, 14); */
-            this.getaddress(latitude, longitude);
-            this.createMap(longitude, latitude);    
-            this.loading = false;
-        })
+                this.apartment = response.data.apartment
+                let latitude = response.data.apartment.latitude
+                let longitude = response.data.apartment.longitude
+                /* this.latLonToTileZXY(latitude,longitude, 14); */
+                this.getaddress(latitude, longitude);
+                this.createMap(longitude, latitude);
+                this.loading = false;
+            })
         },
-        letLoad(){
+        letLoad() {
             setTimeout(this.axiosCall, 1000);
         },
-        createMap(lat, lon){
+        createMap(lat, lon) {
             var map = tt.map({
                 key: store.apikey,
                 container: "map",
@@ -61,10 +62,10 @@ export default {
                 zoom: 13,
             })
             map.addControl(new tt.FullscreenControl());
-            map.addControl(new tt.NavigationControl()); 
+            map.addControl(new tt.NavigationControl());
             this.addMarker(map, lat, lon);
         },
-        addMarker(map, lat, lon){
+        addMarker(map, lat, lon) {
             const tt = window.tt;
             var location = [lat, lon];
             var popupOffsets = {
@@ -76,12 +77,12 @@ export default {
                 right: [-25, -35]
             }
             let color = '#02CCBC';
-            var marker = new tt.Marker({color: color, scale: 1, draggable: true }).setLngLat(location).addTo(map);
-            var popup = new tt.Popup({offset: popupOffsets}).setHTML('Siamo qui!');
+            var marker = new tt.Marker({ color: color, scale: 1, draggable: true }).setLngLat(location).addTo(map);
+            var popup = new tt.Popup({ offset: popupOffsets }).setHTML('Siamo qui!');
             marker.setPopup(popup).togglePopup();
         },
         scrollTop() {
-          window.scrollTo(0, 0);
+            window.scrollTo(0, 0);
         }
     }
 }
@@ -140,7 +141,7 @@ export default {
                             <h1 class='apt_title'><strong>{{ apartment.title }}</strong></h1>
                         </div>
                         <div class='my_address'>
-                            <strong>Indirizzo:</strong>{{address}}, {{region}}
+                            <strong>Indirizzo: </strong>{{address}}, {{region}}
                         </div>
                         <div class="">
                             <div class='info_title'>
@@ -251,101 +252,112 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
-.apt_container{
-    font-size:18px;
+.apt_container {
+    font-size: 18px;
 }
-.apt_title{
-    font-size:48px;
+
+.apt_title {
+    font-size: 48px;
     margin-bottom: 0.5rem;
 }
-.my_modal{
-    max-height: 96vh;   
 
-    .my_content{
+.my_modal {
+    max-height: 96vh;
+
+    .my_content {
         height: 50%;
     }
-    .my_modal_img{
+
+    .my_modal_img {
         margin: 0 auto;
         max-width: 75%;
         aspect-ratio: 4 / 3;
     }
 }
 
-.icon_services::before{
+.icon_services::before {
     display: flex;
     width: 20px;
     justify-content: center;
 }
-.icon_services{
-    color:#02CCBC;
+
+.icon_services {
+    color: #02CCBC;
     width: 20px;
 }
 
-.grey_font{
-    color:rgb(160, 160, 160);
+.grey_font {
+    color: rgb(160, 160, 160);
 }
 
-.info_title{
+.info_title {
     font-size: 24px;
 }
 
-#map { 
-        width: 100%;
-        aspect-ratio: 16 / 9; 
-    } 
+#map {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
 
-    .my_img_apt{
-        aspect-ratio: 4 / 3;
+.my_img_apt {
+    aspect-ratio: 4 / 3;
+}
+
+
+@media (min-width: 550px) and (max-width: 992px) {
+    .apt_title {
+        font-size: 36px;
     }
 
+}
 
-    @media (min-width: 550px) and (max-width: 992px){
-        .apt_title{
-            font-size:36px;
-        }
-    
+@media (max-width: 550px) {
+    .apt_title {
+        margin-bottom: 0.5rem;
     }
 
-    @media (max-width: 550px){
-        .apt_title{
-            margin-bottom: 0.5rem;
-        }
-    
-    }
+}
 
 /* loader */
-    .loader {
-        margin-top: 30vh;
-        border: 16px solid #f3f3f3; /* Light grey */
-        border-top: 16px solid #02CCBC; /* Blue */
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 1s linear infinite;
-        }
+.loader {
+    margin-top: 30vh;
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #02CCBC;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+}
 
-        @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-        }
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
 
-        .my_btn{
-        background-color: #02CCBC;
-        color:white;
-        font-weight: bold;
-        font-size: 24px;
-        &:hover{
-            color: #02CCBC;
-            background-color: white;
-            border: 1px #02CCBC solid;
-        }
-        }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.my_btn {
+    background-color: #02CCBC;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+
+    &:hover {
+        color: #02CCBC;
+        background-color: white;
+        border: 1px #02CCBC solid;
+    }
+}
 
 
-        .my_address{
-            margin-bottom: 0.5rem;
-        }
+.my_address {
+    margin-bottom: 0.5rem;
+}
 
 /* loader 2 */
 /* 
@@ -403,6 +415,4 @@ export default {
     transform: scale(1);
   }
 } */
-    
-    
 </style>

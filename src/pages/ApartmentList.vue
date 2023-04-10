@@ -11,7 +11,7 @@ export default {
         return {
             store,
             services: [],
-            range: '',
+            range: 20,
             n_beds: '',
             n_bathrooms: '',
             n_rooms: '',
