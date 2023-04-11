@@ -46,18 +46,21 @@ export default {
     <div class="single-card"> -->
 
     <!-- </div> -->
-    <div class="single-card">
+    <div class="single-card our-card">
         <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug }}">
             <div class=" w-100 position-relative">
                 <img :src="apartment.image != null ? `${this.store.baseUrl}/storage/${apartment.image}` : 'https://picsum.photos/300/200'" alt="" class="rounded-4" @click='getLatAndLon(apartment)'>
                 <div v-show="isVisible" class="position-absolute p-1 hover-back text-white">
-                    <ul class="list-unstyled d-flex justify-content-center gap-3 m-0 w-100">
+                    <ul v-if="apartment.services.length !== 0" class="list-unstyled d-flex justify-content-center gap-3 m-0 w-100">
                         <li v-for="service in apartment.services" :key="service" class="d-flex">
                             <div>
                                 <i :class="service.class_icon"></i>
                             </div>
                         </li>
                     </ul>
+                    <div class="w-100" v-else>
+                        <p class="text-center mb-0">Nessun servizio</p>
+                    </div>
                 </div>
             </div>
         </router-link>
