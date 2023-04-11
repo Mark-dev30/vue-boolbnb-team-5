@@ -140,8 +140,8 @@ export default {
                         <div>
                             <h1 class='apt_title'><strong>{{ apartment.title }}</strong></h1>
                         </div>
-                        <div class='my_address'>
-                            <strong>Indirizzo: </strong>{{address}}, {{region}}
+                        <div class='my_address ms-2'>
+                            <strong><i class="fa-solid fa-map-location-dot icon_services me-2 "></i>Indirizzo: </strong>{{address}}, {{region}}
                         </div>
                         <div class="">
                             <div class='info_title'>
